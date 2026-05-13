@@ -38,7 +38,7 @@ export async function POST(req: Request) {
 
   const result = data.result ?? data;
 
-  if (!result?.clauses) {
+  if (!result?.clauses?.length) {
     return NextResponse.json(
       { error: "The document could not be analyzed as a lease agreement. Please upload a rental/lease agreement PDF." },
       { status: 422 },
