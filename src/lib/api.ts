@@ -11,11 +11,15 @@ export async function analyzeLeaseText(
     body: JSON.stringify({ leaseText, stage, state }),
   });
 
-  if (!res.ok) {
-    throw new Error(`Analysis failed: ${res.statusText}`);
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok || !data?.clauses) {
+    throw new Error(
+      data?.error || "Analysis failed. Please check your PDF and try again.",
+    );
   }
 
-  return res.json();
+  return data;
 }
 
 export async function chatAboutLease(
@@ -30,7 +34,8 @@ export async function chatAboutLease(
   });
 
   if (!res.ok) {
-    throw new Error(`Chat failed: ${res.statusText}`);
+    const text = await res.text().catch(() => "");
+    throw new Error(text || "Chat failed. Please try again.");
   }
 
   return res.body;
