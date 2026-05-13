@@ -1,3 +1,5 @@
+export const maxDuration = 60;
+
 const AGENT_URL = process.env.AGENT_API_URL || "https://lease-shield-agent.fly.dev";
 
 export async function POST(req: Request) {
