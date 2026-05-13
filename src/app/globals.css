@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0b0d;
+  --primary: #0052ff;
+  --primary-active: #003ecc;
+  --primary-disabled: #a8b8cc;
+  --ink: #0a0b0d;
+  --body: #5b616e;
+  --muted: #7c828a;
+  --muted-soft: #a8acb3;
+  --hairline: #dee1e6;
+  --hairline-soft: #eef0f3;
+  --surface-soft: #f7f7f7;
+  --surface-strong: #eef0f3;
+  --surface-dark: #0a0b0d;
+  --surface-dark-elevated: #16181c;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --on-dark-soft: #a8acb3;
+  --semantic-up: #05b169;
+  --semantic-down: #cf202f;
+  --severity-high: #cf202f;
+  --severity-medium: #f4b000;
+  --severity-low: #0052ff;
+}
+
+.dark {
+  --background: #0a0b0d;
+  --foreground: #ffffff;
+  --primary: #4d8cff;
+  --primary-active: #6ea3ff;
+  --primary-disabled: #2a3a5c;
+  --ink: #ffffff;
+  --body: #a8acb3;
+  --muted: #7c828a;
+  --muted-soft: #5b616e;
+  --hairline: #2a2d33;
+  --hairline-soft: #1e2127;
+  --surface-soft: #16181c;
+  --surface-strong: #1e2127;
+  --surface-dark: #0a0b0d;
+  --surface-dark-elevated: #16181c;
+  --on-primary: #ffffff;
+  --on-dark: #ffffff;
+  --on-dark-soft: #7c828a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-active: var(--primary-active);
+  --color-primary-disabled: var(--primary-disabled);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+  --color-hairline: var(--hairline);
+  --color-hairline-soft: var(--hairline-soft);
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-strong: var(--surface-strong);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-dark-elevated: var(--surface-dark-elevated);
+  --color-on-primary: var(--on-primary);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-soft: var(--on-dark-soft);
+  --color-semantic-up: var(--semantic-up);
+  --color-semantic-down: var(--semantic-down);
+  --color-severity-high: var(--severity-high);
+  --color-severity-medium: var(--severity-medium);
+  --color-severity-low: var(--severity-low);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease-out both;
 }
