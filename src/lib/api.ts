@@ -1,21 +1,14 @@
 import type { AnalysisResult, Stage } from "./types";
 
-const API_URL = process.env.NEXT_PUBLIC_AGENT_API_URL || "http://localhost:3583";
-
 export async function analyzeLeaseText(
   leaseText: string,
   stage: Stage,
   state: string,
 ): Promise<AnalysisResult> {
-  const res = await fetch(`${API_URL}/agents/lease-analyzer/session-${Date.now()}`, {
+  const res = await fetch("/api/analyze", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      mode: "analyze",
-      leaseText,
-      stage,
-      state,
-    }),
+    body: JSON.stringify({ leaseText, stage, state }),
   });
 
   if (!res.ok) {
@@ -30,15 +23,10 @@ export async function chatAboutLease(
   question: string,
   sessionId: string,
 ): Promise<ReadableStream<Uint8Array> | null> {
-  const res = await fetch(`${API_URL}/agents/lease-analyzer/${sessionId}`, {
+  const res = await fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      mode: "chat",
-      leaseText,
-      question,
-      sessionId,
-    }),
+    body: JSON.stringify({ leaseText, question, sessionId }),
   });
 
   if (!res.ok) {
